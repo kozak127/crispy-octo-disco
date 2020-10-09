@@ -1,0 +1,90 @@
+buildscript {
+    ext {
+        springBootVersion = '2.3.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+plugins {
+    id "org.sonarqube" version "2.6.2"
+    id "com.gorylenko.gradle-git-properties" version "1.5.1"
+}
+
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
+
+group = 'org.wesoly.michal.crispy-octo-disco'
+version = '0.0.1'
+sourceCompatibility = '1.11'
+jar.baseName = "$project.name"
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+ext {
+    set('springCloudVersion', 'Greenwich.RC2')
+    set('swaggerVersion', '2.9.+')
+}
+
+springBoot {
+    buildInfo()
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-actuator')
+    implementation('org.springframework.cloud:spring-cloud-starter-sleuth')
+    implementation('org.springframework.cloud:spring-cloud-starter-zipkin')
+
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.springframework.cloud:spring-cloud-starter-oauth2')
+
+    //  Swagger is used to document our api endpoints
+    implementation('io.springfox:springfox-swagger2:2.9.+')
+    implementation('io.springfox:springfox-swagger-ui:2.9.+')
+
+    implementation('org.apache.commons:commons-lang3:3.+')
+
+    compileOnly('org.projectlombok:lombok:1.18.+')
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.security:spring-security-test')
+
+    testImplementation 'org.assertj:assertj-core:3.17.+'
+
+}
+
+sonarqube {
+    properties {
+        property 'sonar.projectName', project.name
+        property 'sonar.host.url', 'http://localhost:9000'
+        property 'sonar.login', 'admin'
+        property 'sonar.password', 'admin'
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task packageJavadoc(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}

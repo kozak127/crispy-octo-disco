@@ -1,0 +1,28 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'application'
+}
+
+group = 'org.wesoly.michal.crispy-octo-disco'
+version = '0.0.1'
+sourceCompatibility = '1.11'
+jar.baseName = "$project.name"
+mainClassName = 'org.wesoly.michal.crispy-octo-disco.Application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.+'
+
+    compileOnly 'org.projectlombok:lombok:1.18.+'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.assertj:assertj-core:3.17.+'
+}

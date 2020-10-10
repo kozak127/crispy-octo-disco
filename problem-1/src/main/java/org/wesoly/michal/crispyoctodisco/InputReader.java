@@ -12,12 +12,15 @@ import org.apache.commons.lang3.StringUtils;
 @Getter
 public class InputReader {
 
+    private static final String GREETING = "Please input the K-number and at least 2 A-values. To finish, type any other char than number. Empty lines are ignored";
+    private static final String ERROR_MESSAGE = "Given values are invalid. Please input K-Number and at least 2 A-values";
+
     private Integer sumValue = null;
     private List<Integer> numbers = new ArrayList<>();
 
     public void read() {
         clear();
-        print("Please input the K-number and at least 2 A-values. To finish, type any other char than number. Empty lines are ignored");
+        print(GREETING);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         boolean valid = false;
@@ -25,12 +28,10 @@ public class InputReader {
             readValues(reader);
             valid = verify();
             if (!valid) {
-                print("Given values are invalid. Please input K-Number and at least 2 A-values");
+                print(ERROR_MESSAGE);
                 clear();
             }
         }
-
-        print("Thank you");
     }
 
     private void clear() {

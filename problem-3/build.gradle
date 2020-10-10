@@ -41,22 +41,23 @@ springBoot {
 }
 
 dependencies {
-    implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation('org.springframework.boot:spring-boot-starter-actuator')
-    implementation('org.springframework.cloud:spring-cloud-starter-sleuth')
-    implementation('org.springframework.cloud:spring-cloud-starter-zipkin')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
 
-    implementation('org.springframework.boot:spring-boot-starter-security')
-    implementation('org.springframework.cloud:spring-cloud-starter-oauth2')
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
 
     //  Swagger is used to document our api endpoints
-    implementation('io.springfox:springfox-swagger2:2.9.+')
-    implementation('io.springfox:springfox-swagger-ui:2.9.+')
+    implementation 'io.springfox:springfox-swagger2:2.9.+'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.+'
 
-    implementation('org.apache.commons:commons-lang3:3.+')
+    implementation 'org.apache.commons:commons-lang3:3.+'
+    implementation 'com.google.guava:guava:29.0-jre'
 
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
-    testImplementation('org.springframework.security:spring-security-test')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 
     testImplementation 'org.assertj:assertj-core:3.17.+'
 

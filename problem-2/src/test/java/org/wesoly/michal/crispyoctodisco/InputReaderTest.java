@@ -29,6 +29,7 @@ public class InputReaderTest {
     @Test
     public void shouldProcessGivenExamplesCorrectly() throws IOException {
 
+        // GIVEN
         String expression1 = "+ + 0.5 1.5 * 4 10";
         String expression2 = "- 2e3 - 700 + 7 * 2 15";
         String expression3 = "- -1.5 * 3.1415 / -7 -2";
@@ -36,7 +37,6 @@ public class InputReaderTest {
         String expression5 = "1 2";
         String expression6 = "+ 1";
 
-        // GIVEN
         String example = expression1 + "\n" +
                 expression2 + "\n"
                 + expression3 + "\n"

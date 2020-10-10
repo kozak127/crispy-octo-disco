@@ -4,16 +4,17 @@ import com.google.common.collect.MoreCollectors;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Optional;
 import java.util.Stack;
 
 public class Operations {
 
     private final List<Operation> operations = List.of(new Push(), new Addition(), new Subtraction(), new Multiplication(), new Division());
 
-    public Operation find(String item) {
+    public Optional<Operation> find(String item) {
         return operations.stream()
                 .filter(operation -> operation.isApplicable(item))
-                .collect(MoreCollectors.onlyElement());
+                .collect(MoreCollectors.toOptional());
     }
 
     private static class Push implements Operation {

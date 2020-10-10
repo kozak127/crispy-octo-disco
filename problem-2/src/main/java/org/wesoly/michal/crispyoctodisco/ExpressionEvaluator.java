@@ -23,7 +23,7 @@ public class ExpressionEvaluator {
 
         try {
             evaluateItems(values, items);
-        } catch (EmptyStackException ex) {
+        } catch (EmptyStackException | IllegalArgumentException ex) {
             return ERROR;
         }
 
@@ -42,9 +42,9 @@ public class ExpressionEvaluator {
         return items;
     }
 
-    private void evaluateItems(Stack<Float> values, List<String> items) throws EmptyStackException {
+    private void evaluateItems(Stack<Float> values, List<String> items) throws EmptyStackException, IllegalArgumentException {
         for (String item : items) {
-            Operation operation = operations.find(item);
+            Operation operation = operations.find(item).orElseThrow(IllegalArgumentException::new);
             operation.apply(values, item);
         }
     }

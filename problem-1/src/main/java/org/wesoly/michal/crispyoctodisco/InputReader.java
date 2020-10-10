@@ -18,7 +18,7 @@ public class InputReader {
     private Integer sumValue = null;
     private List<Integer> numbers = new ArrayList<>();
 
-    public void read() {
+    public void read() throws IOException {
         clear();
         print(GREETING);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -39,13 +39,13 @@ public class InputReader {
         numbers = new ArrayList<>();
     }
 
-    private void readValues(BufferedReader reader) {
+    private void readValues(BufferedReader reader) throws IOException {
         try {
             sumValue = readLine(reader);
             while (true) { // NOSONAR
                 numbers.add(readLine(reader));
             }
-        } catch (NumberFormatException | IOException ex) {
+        } catch (NumberFormatException ex) {
             // DO NOTHING
         }
     }

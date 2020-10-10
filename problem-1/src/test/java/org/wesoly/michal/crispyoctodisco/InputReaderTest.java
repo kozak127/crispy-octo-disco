@@ -3,6 +3,7 @@ package org.wesoly.michal.crispyoctodisco;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import org.junit.After;
@@ -25,7 +26,7 @@ public class InputReaderTest {
     }
 
     @Test
-    public void shouldProcessGivenExamplesCorrectly() {
+    public void shouldProcessGivenExamplesCorrectly() throws IOException {
 
         // GIVEN
         String example = "6\n2\n1\n4\n5\n3\nA";
@@ -44,7 +45,7 @@ public class InputReaderTest {
     }
 
     @Test
-    public void shouldProcessGivenExamplesCorrectlyWithEmptyLines() {
+    public void shouldProcessGivenExamplesCorrectlyWithEmptyLines() throws IOException {
 
         // GIVEN
         String example = "6\n\n2\n1\n4\n\n5\n3\nA";

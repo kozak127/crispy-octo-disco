@@ -1,11 +1,12 @@
 package org.wesoly.michal.crispyoctodisco;
 
+import java.io.IOException;
 import java.util.List;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         InputReader inputReader = new InputReader();
 

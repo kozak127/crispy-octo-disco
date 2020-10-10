@@ -16,6 +16,6 @@ public class Application {
         ProblemProcessor processor = new ProblemProcessor();
 
         List<Pair<Integer, Integer>> result = processor.process(sumValue, numbers);
-        System.out.println(result.size());
+        System.out.println("Found pairs: " + result.size());
     }
 }

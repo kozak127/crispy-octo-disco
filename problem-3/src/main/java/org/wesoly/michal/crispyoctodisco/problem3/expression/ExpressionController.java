@@ -20,9 +20,11 @@ public class ExpressionController {
 
     @PostMapping
     public ResponseEntity<ExpressionEvaluationResponseDto> evaluateExpression(@RequestBody ExpressionEvaluationRequestDto requestDto) {
+        log.debug("Received request to evaluate expressions: {}", requestDto);
         List<String> expressions = requestDto.getExpressions();
         List<String> evaluatedExpressions = evaluator.evaluate(expressions);
         ExpressionEvaluationResponseDto responseDto = new ExpressionEvaluationResponseDto(evaluatedExpressions);
+        log.debug("Evaluated expressions: {}", responseDto);
         return createSuccessfulResponse(responseDto);
     }
 

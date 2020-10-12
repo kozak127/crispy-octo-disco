@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.wesoly.michal.crispyoctodisco.problem3.expression.operation.Operation;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ExpressionEvaluator {
@@ -28,15 +30,22 @@ public class ExpressionEvaluator {
 
         try {
             evaluateItems(values, items);
-        } catch (EmptyStackException | IllegalArgumentException ex) {
+        } catch (EmptyStackException ex) {
+            log.warn("Problem evaluating expression: {}", expression);
             return ERROR;
+        } catch (IllegalArgumentException ex) {
+            log.warn("Couldn't find operations to evaluate expression: {}", expression);
+
         }
 
         if (values.size() > 1 || values.empty()) {
+            log.warn("Problem evaluating expression: {}", expression);
             return ERROR;
         }
 
-        return String.format("%.2f", values.peek());
+        String result = String.format("%.2f", values.peek());
+        log.debug("Successfully evaluated expression: {} with result: {}", expression, result);
+        return result;
     }
 
     private List<String> splitExpression(String expression) {

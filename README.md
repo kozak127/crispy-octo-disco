@@ -23,3 +23,4 @@ Result of evaluated expression.
 
 ### problem-3
 This is a spring-boot application, adding REST interface to problem-2. Please edit application.properties to your taste before running.
+Example request: ```curl -i --user username --header 'Content-Type: application/json' --request POST --data '{"expressions": ["7 4 +"]}' http://localhost:8080/api/expression```

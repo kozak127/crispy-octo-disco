@@ -41,7 +41,7 @@ public class ExpressionIntegrationTest {
         ExpressionEvaluationRequestDto requestDto = new ExpressionEvaluationRequestDto(expressions);
 
         // WHEN
-        MvcResult mvcResult = mockMvc.perform(post("/expression")
+        MvcResult mvcResult = mockMvc.perform(post("/api/expression")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDto)))
                 .andReturn();
@@ -75,7 +75,7 @@ public class ExpressionIntegrationTest {
         ExpressionEvaluationRequestDto requestDto = new ExpressionEvaluationRequestDto(expressions);
 
         // WHEN
-        MvcResult mvcResult = mockMvc.perform(post("/expression")
+        MvcResult mvcResult = mockMvc.perform(post("/api/expression")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDto)))
                 .andReturn();

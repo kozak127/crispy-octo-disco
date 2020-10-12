@@ -49,7 +49,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
 
-    //  Swagger is used to document our api endpoints
     implementation 'io.springfox:springfox-swagger2:2.9.+'
     implementation 'io.springfox:springfox-swagger-ui:2.9.+'
 

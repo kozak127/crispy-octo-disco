@@ -1,15 +1,15 @@
-package org.wesoly.michal.crispyoctodisco;
+package org.wesoly.michal.crispyoctodisco.expression;
 
 import com.google.common.collect.MoreCollectors;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.wesoly.michal.crispyoctodisco.operation.Operation;
+import org.wesoly.michal.crispyoctodisco.expression.operation.Operation;
 
 @Service
 @RequiredArgsConstructor
-public class Operations {
+public class ExpressionOperations {
 
     private final List<Operation> operations;
 

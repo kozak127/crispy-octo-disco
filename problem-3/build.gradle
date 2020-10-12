@@ -67,6 +67,10 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.+'
 }
 
+test {
+    useJUnitPlatform()
+}
+
 sonarqube {
     properties {
         property 'sonar.projectName', project.name

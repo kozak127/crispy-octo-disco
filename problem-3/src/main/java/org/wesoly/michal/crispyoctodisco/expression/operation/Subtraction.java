@@ -1,12 +1,12 @@
-package org.wesoly.michal.crispyoctodisco.operation;
+package org.wesoly.michal.crispyoctodisco.expression.operation;
 
 import java.util.Stack;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Division implements Operation {
+public class Subtraction implements Operation {
 
-    private static final String OPERATOR = "/";
+    private static final String OPERATOR = "-";
 
     @Override
     public boolean isApplicable(String item) {
@@ -16,6 +16,6 @@ public class Division implements Operation {
     @Override
     public void apply(Stack<Float> values, String item) {
         Float secondValue = values.pop();
-        values.push(values.pop() / secondValue);
+        values.push(values.pop() - secondValue);
     }
 }

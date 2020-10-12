@@ -1,4 +1,4 @@
-package org.wesoly.michal.crispyoctodisco;
+package org.wesoly.michal.crispyoctodisco.expression;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;

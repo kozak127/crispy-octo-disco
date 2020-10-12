@@ -1,4 +1,4 @@
-package org.wesoly.michal.crispyoctodisco.operation;
+package org.wesoly.michal.crispyoctodisco.expression.operation;
 
 import java.util.Stack;
 import org.springframework.stereotype.Component;

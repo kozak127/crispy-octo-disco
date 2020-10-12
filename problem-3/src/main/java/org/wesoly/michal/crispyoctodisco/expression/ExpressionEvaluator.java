@@ -1,4 +1,4 @@
-package org.wesoly.michal.crispyoctodisco;
+package org.wesoly.michal.crispyoctodisco.expression;
 
 import java.util.EmptyStackException;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.wesoly.michal.crispyoctodisco.operation.Operation;
+import org.wesoly.michal.crispyoctodisco.expression.operation.Operation;
 
 @Service
 @RequiredArgsConstructor
@@ -14,7 +14,7 @@ public class ExpressionEvaluator {
 
     private static final String ERROR = "error";
 
-    private final Operations operations;
+    private final ExpressionOperations operations;
 
     public List<String> evaluate(List<String> expressions) {
         return expressions.stream()

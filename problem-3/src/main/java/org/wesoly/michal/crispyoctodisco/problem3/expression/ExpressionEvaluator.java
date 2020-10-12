@@ -15,6 +15,7 @@ import org.wesoly.michal.crispyoctodisco.problem3.expression.operation.Operation
 public class ExpressionEvaluator {
 
     private static final String ERROR = "error";
+    private static final String FORMAT = "%.2f";
 
     private final ExpressionOperations operations;
 
@@ -35,7 +36,7 @@ public class ExpressionEvaluator {
             return ERROR;
         } catch (IllegalArgumentException ex) {
             log.warn("Couldn't find operations to evaluate expression: {}", expression);
-
+            return ERROR;
         }
 
         if (values.size() > 1 || values.empty()) {
@@ -43,7 +44,7 @@ public class ExpressionEvaluator {
             return ERROR;
         }
 
-        String result = String.format("%.2f", values.peek());
+        String result = String.format(FORMAT, values.peek());
         log.debug("Successfully evaluated expression: {} with result: {}", expression, result);
         return result;
     }

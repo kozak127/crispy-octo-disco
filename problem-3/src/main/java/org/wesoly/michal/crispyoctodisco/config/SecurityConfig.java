@@ -1,6 +1,5 @@
-package org.wesoly.michal.crispyoctodisco.security;
+package org.wesoly.michal.crispyoctodisco.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -14,10 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
-public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
-
-    private final CustomBasicAuthenticationEntryPoint authenticationEntryPoint;
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${security.user.name}")
     private String username;
@@ -42,8 +38,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
                 .csrf().disable()
                 .authorizeRequests().anyRequest().authenticated()
                 .and()
-                .httpBasic()
-                .authenticationEntryPoint(authenticationEntryPoint);
+                .httpBasic();
     }
 
     @Bean

@@ -5,8 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,13 +36,17 @@ public class InputReaderTest {
         // WHEN
         inputReader.read();
         Integer sumValue = inputReader.getSumValue();
-        List<IndexedNumber> numbers = inputReader.getNumbers();
+        Integer maxIndex = inputReader.getMaxIndex();
+        IndexedNumber[] numbers = inputReader.getNumbers();
 
         // THEN
-        List<IndexedNumber> expectedNumbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3));
-
         assertThat(sumValue).isEqualTo(6);
-        assertThat(numbers).containsExactlyElementsOf(expectedNumbers);
+        assertThat(maxIndex).isEqualTo(4);
+        assertThat(numbers[0]).isEqualTo(new IndexedNumber(0, 2));
+        assertThat(numbers[1]).isEqualTo(new IndexedNumber(1, 1));
+        assertThat(numbers[2]).isEqualTo(new IndexedNumber(2, 4));
+        assertThat(numbers[3]).isEqualTo(new IndexedNumber(3, 5));
+        assertThat(numbers[4]).isEqualTo(new IndexedNumber(4, 3));
     }
 
     @Test
@@ -59,21 +61,16 @@ public class InputReaderTest {
         // WHEN
         inputReader.read();
         Integer sumValue = inputReader.getSumValue();
-        List<IndexedNumber> numbers = inputReader.getNumbers();
+        Integer maxIndex = inputReader.getMaxIndex();
+        IndexedNumber[] numbers = inputReader.getNumbers();
 
         // THEN
-        List<IndexedNumber> expectedNumbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3));
-
         assertThat(sumValue).isEqualTo(6);
-        assertThat(numbers).containsExactlyElementsOf(expectedNumbers);
-    }
-
-    private List<IndexedNumber> createIndexedNumbers(List<Integer> numbers) {
-        List<IndexedNumber> toReturn = new ArrayList<>();
-        for (int index = 0; index < numbers.size(); index++) {
-            Integer number = numbers.get(index);
-            toReturn.add(new IndexedNumber(index, number));
-        }
-        return toReturn;
+        assertThat(maxIndex).isEqualTo(4);
+        assertThat(numbers[0]).isEqualTo(new IndexedNumber(0, 2));
+        assertThat(numbers[1]).isEqualTo(new IndexedNumber(1, 1));
+        assertThat(numbers[2]).isEqualTo(new IndexedNumber(2, 4));
+        assertThat(numbers[3]).isEqualTo(new IndexedNumber(3, 5));
+        assertThat(numbers[4]).isEqualTo(new IndexedNumber(4, 3));
     }
 }

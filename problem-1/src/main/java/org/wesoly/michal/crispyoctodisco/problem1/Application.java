@@ -12,11 +12,12 @@ public class Application {
 
         inputReader.read();
         Integer sumValue = inputReader.getSumValue();
-        List<IndexedNumber> numbers = inputReader.getNumbers();
+        Integer maxIndex = inputReader.getMaxIndex();
+        IndexedNumber[] numbers = inputReader.getNumbers();
 
         ProblemProcessor processor = new ProblemProcessor();
 
-        List<Pair<IndexedNumber, IndexedNumber>> result = processor.process(sumValue, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> result = processor.process(sumValue, maxIndex, numbers);
         System.out.println("Found pairs: " + result.size());
     }
 }

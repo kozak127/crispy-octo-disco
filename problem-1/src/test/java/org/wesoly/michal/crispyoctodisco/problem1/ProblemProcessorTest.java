@@ -2,7 +2,7 @@ package org.wesoly.michal.crispyoctodisco.problem1;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,11 +17,12 @@ public class ProblemProcessorTest {
     public void shouldProcessGivenExamplesCorrectly() {
 
         // GIVEN
-        List<IndexedNumber> numbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3));
+        IndexedNumber[] numbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3));
         Integer sumValue = 6;
+        Integer maxIndex = 4;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
 
         // THEN
         assertThat(pairs).containsExactlyInAnyOrder(resultPair(numbers, 2, 4), resultPair(numbers, 1, 5));
@@ -31,11 +32,12 @@ public class ProblemProcessorTest {
     public void shouldProcessCorrectlyWhenNumbersAreHigher() {
 
         // GIVEN
-        List<IndexedNumber> numbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3, 7, 10, 22));
+        IndexedNumber[] numbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3, 7, 10, 22));
         Integer sumValue = 6;
+        Integer maxIndex = 7;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
 
         // THEN
         assertThat(pairs).containsExactlyInAnyOrder(resultPair(numbers, 2, 4), resultPair(numbers, 1, 5));
@@ -45,11 +47,12 @@ public class ProblemProcessorTest {
     public void shouldProcessCorrectlyWithNegativeNumbers() {
 
         // GIVEN
-        List<IndexedNumber> numbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3, -1, -2, 7));
+        IndexedNumber[] numbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3, -1, -2, 7));
         Integer sumValue = 6;
+        Integer maxIndex = 7;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
 
         // THEN
         assertThat(pairs).containsExactlyInAnyOrder(resultPair(numbers, 2, 4), resultPair(numbers, 1, 5), resultPair(numbers, -1, 7));
@@ -59,11 +62,12 @@ public class ProblemProcessorTest {
     public void shouldProcessCorrectlyWithNegativeSumValue() {
 
         // GIVEN
-        List<IndexedNumber> numbers = createIndexedNumbers(List.of(2, 1, -4, -5, 3, -1, -2, 7, 0, -7, 8, -6));
+        IndexedNumber[] numbers = createIndexedNumbers(List.of(2, 1, -4, -5, 3, -1, -2, 7, 0, -7, 8, -6));
         Integer sumValue = -6;
+        Integer maxIndex = 11;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
 
         // THEN
         assertThat(pairs).containsExactlyInAnyOrder(resultPair(numbers, -4, -2), resultPair(numbers, -5, -1));
@@ -73,11 +77,12 @@ public class ProblemProcessorTest {
     public void shouldProcessCorrectlyWhenNumbersAreLower() {
 
         // GIVEN
-        List<IndexedNumber> numbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3, 7, 10, 22));
+        IndexedNumber[] numbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3, 7, 10, 22));
         Integer sumValue = 77;
+        Integer maxIndex = 7;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
 
         // THEN
         assertThat(pairs).isEmpty();
@@ -87,13 +92,13 @@ public class ProblemProcessorTest {
     public void shouldProcessCorrectlyWithGreatRangeOfNumbersAndLowSumValue() {
 
         // GIVEN
-        //List<IndexedNumber> numbers = createIndexedNumbers(IntStream.rangeClosed(1, 10000000).boxed().collect(Collectors.toList()));
-        List<IndexedNumber> numbers = createIndexedNumbers(IntStream.rangeClosed(1, 5000000).boxed().collect(Collectors.toList()));
+        IndexedNumber[] numbers = createIndexedNumbers(IntStream.rangeClosed(1, 10000000).boxed().collect(Collectors.toList()));
+        Integer maxIndex = 10000000 - 1;
 
         Integer sumValue = 6;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
 
         // THEN
         assertThat(pairs).containsExactlyInAnyOrder(resultPair(numbers, 2, 4), resultPair(numbers, 1, 5));
@@ -103,25 +108,24 @@ public class ProblemProcessorTest {
     public void shouldProcessCorrectlyWithGreatRangeOfNumbersAndHighSumValue() {
 
         // GIVEN
-        //List<IndexedNumber> numbers = createIndexedNumbers(IntStream.rangeClosed(1, 10000000).boxed().collect(Collectors.toList()));
-
-        List<IndexedNumber> numbers = createIndexedNumbers(IntStream.rangeClosed(1, 5000000).boxed().collect(Collectors.toList()));
+        IndexedNumber[] numbers = createIndexedNumbers(IntStream.rangeClosed(1, 10000000).boxed().collect(Collectors.toList()));
         Integer sumValue = 2500000;
+        Integer maxIndex = 10000000 - 1;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
 
         // THEN
         assertThat(pairs).hasSize(1249999);
     }
 
-    private Pair<IndexedNumber, IndexedNumber> resultPair(List<IndexedNumber> numbers, int leftValue, int rightValue) {
-        IndexedNumber left = numbers.stream()
+    private Pair<IndexedNumber, IndexedNumber> resultPair(IndexedNumber[] numbers, int leftValue, int rightValue) {
+        IndexedNumber left = Arrays.stream(numbers)
                 .filter(number -> number.getValue() == leftValue)
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
 
-        IndexedNumber right = numbers.stream()
+        IndexedNumber right = Arrays.stream(numbers)
                 .filter(number -> number.getValue() == rightValue)
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
@@ -129,11 +133,11 @@ public class ProblemProcessorTest {
         return Pair.of(left, right);
     }
 
-    private List<IndexedNumber> createIndexedNumbers(List<Integer> numbers) {
-        List<IndexedNumber> toReturn = new ArrayList<>();
+    private IndexedNumber[] createIndexedNumbers(List<Integer> numbers) {
+        IndexedNumber[] toReturn = new IndexedNumber[numbers.size()];
         for (int index = 0; index < numbers.size(); index++) {
             Integer number = numbers.get(index);
-            toReturn.add(new IndexedNumber(index, number));
+            toReturn[index] = new IndexedNumber(index, number);
         }
         return toReturn;
     }

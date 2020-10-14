@@ -16,7 +16,7 @@ public class InputReader {
     private static final String ERROR_MESSAGE = "Given values are invalid. Please input K-Number and at least 2 A-values";
 
     private Integer sumValue = null;
-    private List<Integer> numbers = new ArrayList<>();
+    private List<IndexedNumber> numbers = new ArrayList<>();
 
     public void read() throws IOException {
         clear();
@@ -42,8 +42,12 @@ public class InputReader {
     private void readValues(BufferedReader reader) throws IOException {
         try {
             sumValue = readLine(reader);
+            int index = 0;
             while (true) { // NOSONAR
-                numbers.add(readLine(reader));
+                Integer value = readLine(reader);
+                IndexedNumber indexedNumber = new IndexedNumber(index, value);
+                numbers.add(indexedNumber);
+                index++;
             }
         } catch (NumberFormatException ex) {
             // DO NOTHING

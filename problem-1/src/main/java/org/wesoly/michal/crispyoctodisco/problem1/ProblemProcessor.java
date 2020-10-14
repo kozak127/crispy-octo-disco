@@ -6,41 +6,49 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class ProblemProcessor {
 
-    List<Pair<Integer, Integer>> process(Integer sumValue, List<Integer> numbers) {
+    List<Pair<IndexedNumber, IndexedNumber>> process(Integer sumValue, List<IndexedNumber> numbers) {
 
-        numbers.sort(Integer::compareTo);
+        numbers.sort(IndexedNumber::compareTo);
 
-        List<Pair<Integer, Integer>> result = new ArrayList<>();
+        List<Pair<IndexedNumber, IndexedNumber>> result = new ArrayList<>();
 
-        int index = 0;
-        int reverseIndex = numbers.size() - 1;
+        int sortedIndex = 0;
+        int reverseSortedIndex = numbers.size() - 1;
 
-        while (index < reverseIndex) {
-            while (sumLowerThanSumValue(sumValue, numbers, index, reverseIndex)) {
-                int firstValue = numbers.get(index);
-                int secondValue = numbers.get(reverseIndex);
-                if (firstValue + secondValue == sumValue) {
-                    result.add(Pair.of(firstValue, secondValue));
+        while (sortedIndex < reverseSortedIndex) {
+            while (isSumLowerThanSumValue(sumValue, numbers, sortedIndex, reverseSortedIndex)) {
+                IndexedNumber left = numbers.get(sortedIndex);
+                IndexedNumber right = numbers.get(reverseSortedIndex);
+                if (isSumEqualSumValue(left, right, sumValue) && isLeftIndexLowerThanRightIndex(left, right)) {
+                    result.add(Pair.of(left, right));
                 }
-                index++;
+                sortedIndex++;
             }
-            while (sumHigherThanSumValue(sumValue, numbers, index, reverseIndex)) {
-                int firstValue = numbers.get(index);
-                int secondValue = numbers.get(reverseIndex);
-                if (firstValue + secondValue == sumValue) {
-                    result.add(Pair.of(firstValue, secondValue));
+            while (isSumHigherThanSumValue(sumValue, numbers, sortedIndex, reverseSortedIndex)) {
+                IndexedNumber left = numbers.get(sortedIndex);
+                IndexedNumber right = numbers.get(reverseSortedIndex);
+                if (isSumEqualSumValue(left, right, sumValue) && isLeftIndexLowerThanRightIndex(left, right)) {
+                    result.add(Pair.of(left, right));
                 }
-                reverseIndex--;
+                reverseSortedIndex--;
             }
         }
         return result;
     }
 
-    private boolean sumHigherThanSumValue(Integer sumValue, List<Integer> numbers, int index, int reverseIndex) {
-        return numbers.get(index) + numbers.get(reverseIndex) >= sumValue && index < reverseIndex;
+    private boolean isSumEqualSumValue(IndexedNumber left, IndexedNumber right, Integer sumValue) {
+        return left.getValue() + right.getValue() == sumValue;
     }
 
-    private boolean sumLowerThanSumValue(Integer sumValue, List<Integer> numbers, int index, int reverseIndex) {
-        return numbers.get(index) + numbers.get(reverseIndex) <= sumValue && index < reverseIndex;
+    private boolean isLeftIndexLowerThanRightIndex(IndexedNumber left, IndexedNumber right) {
+        return left.getIndex() < right.getIndex();
+    }
+
+    private boolean isSumHigherThanSumValue(Integer sumValue, List<IndexedNumber> numbers, int index, int reverseIndex) {
+        return numbers.get(index).getValue() + numbers.get(reverseIndex).getValue() >= sumValue && index < reverseIndex;
+    }
+
+    private boolean isSumLowerThanSumValue(Integer sumValue, List<IndexedNumber> numbers, int index, int reverseIndex) {
+        return numbers.get(index).getValue() + numbers.get(reverseIndex).getValue() <= sumValue && index < reverseIndex;
     }
 }

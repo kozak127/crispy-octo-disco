@@ -36,12 +36,10 @@ public class InputReaderTest {
         // WHEN
         inputReader.read();
         Integer sumValue = inputReader.getSumValue();
-        Integer maxIndex = inputReader.getMaxIndex();
         IndexedNumber[] numbers = inputReader.getNumbers();
 
         // THEN
         assertThat(sumValue).isEqualTo(6);
-        assertThat(maxIndex).isEqualTo(4);
         assertThat(numbers[0]).isEqualTo(new IndexedNumber(0, 2));
         assertThat(numbers[1]).isEqualTo(new IndexedNumber(1, 1));
         assertThat(numbers[2]).isEqualTo(new IndexedNumber(2, 4));
@@ -61,12 +59,10 @@ public class InputReaderTest {
         // WHEN
         inputReader.read();
         Integer sumValue = inputReader.getSumValue();
-        Integer maxIndex = inputReader.getMaxIndex();
         IndexedNumber[] numbers = inputReader.getNumbers();
 
         // THEN
         assertThat(sumValue).isEqualTo(6);
-        assertThat(maxIndex).isEqualTo(4);
         assertThat(numbers[0]).isEqualTo(new IndexedNumber(0, 2));
         assertThat(numbers[1]).isEqualTo(new IndexedNumber(1, 1));
         assertThat(numbers[2]).isEqualTo(new IndexedNumber(2, 4));

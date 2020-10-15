@@ -3,6 +3,8 @@ package org.wesoly.michal.crispyoctodisco.problem1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
@@ -12,11 +14,9 @@ public class InputReader {
 
     private static final String GREETING = "Please input the K-number and at least 2 A-values. To finish, type any other char than number. Empty lines are ignored";
     private static final String ERROR_MESSAGE = "Given values are invalid. Please input K-Number and at least 2 A-values";
-    private static final int MAX_NUMBER = 10000000;
 
     private Integer sumValue = null;
-    private Integer maxIndex = 0;
-    private IndexedNumber[] numbers = new IndexedNumber[MAX_NUMBER];
+    private IndexedNumber[] numbers = null;
 
     public void read() throws IOException {
         clear();
@@ -36,23 +36,21 @@ public class InputReader {
 
     private void clear() {
         sumValue = null;
-        maxIndex = 0;
-        numbers = new IndexedNumber[MAX_NUMBER];
+        numbers = null;
     }
 
     private void readValues(BufferedReader reader) throws IOException {
+        List<Integer> inputNumbers = new ArrayList<>();
         try {
             sumValue = readLine(reader);
             while (true) { // NOSONAR
                 Integer value = readLine(reader);
-                IndexedNumber indexedNumber = new IndexedNumber(maxIndex, value);
-                numbers[maxIndex] = indexedNumber;
-                maxIndex++;
+                inputNumbers.add(value);
             }
         } catch (NumberFormatException ex) {
             // DO NOTHING
         } finally {
-            maxIndex--; // negate the last incrementation in incomplete loop
+            numbers = convertToIndexedNumberArray(inputNumbers);
         }
     }
 
@@ -65,8 +63,16 @@ public class InputReader {
         return Integer.parseInt(input);
     }
 
+    private IndexedNumber[] convertToIndexedNumberArray(List<Integer> input) {
+        IndexedNumber[] numbers = new IndexedNumber[input.size()];
+        for (int index = 0; index < input.size(); index++) {
+            numbers[index] = new IndexedNumber(index, input.get(index));
+        }
+        return numbers;
+    }
+
     private boolean verify() {
-        return Objects.nonNull(sumValue) && maxIndex >= 2;
+        return Objects.nonNull(sumValue) && Objects.nonNull(numbers) && numbers.length >= 2;
     }
 
     private void print(String toPrint) {

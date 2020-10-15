@@ -19,10 +19,9 @@ public class ProblemProcessorTest {
         // GIVEN
         IndexedNumber[] numbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3));
         Integer sumValue = 6;
-        Integer maxIndex = 4;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
 
         // THEN
         assertThat(pairs).containsExactlyInAnyOrder(resultPair(numbers, 2, 4), resultPair(numbers, 1, 5));
@@ -34,10 +33,9 @@ public class ProblemProcessorTest {
         // GIVEN
         IndexedNumber[] numbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3, 7, 10, 22));
         Integer sumValue = 6;
-        Integer maxIndex = 7;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
 
         // THEN
         assertThat(pairs).containsExactlyInAnyOrder(resultPair(numbers, 2, 4), resultPair(numbers, 1, 5));
@@ -49,10 +47,9 @@ public class ProblemProcessorTest {
         // GIVEN
         IndexedNumber[] numbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3, -1, -2, 7));
         Integer sumValue = 6;
-        Integer maxIndex = 7;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
 
         // THEN
         assertThat(pairs).containsExactlyInAnyOrder(resultPair(numbers, 2, 4), resultPair(numbers, 1, 5), resultPair(numbers, -1, 7));
@@ -64,10 +61,9 @@ public class ProblemProcessorTest {
         // GIVEN
         IndexedNumber[] numbers = createIndexedNumbers(List.of(2, 1, -4, -5, 3, -1, -2, 7, 0, -7, 8, -6));
         Integer sumValue = -6;
-        Integer maxIndex = 11;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
 
         // THEN
         assertThat(pairs).containsExactlyInAnyOrder(resultPair(numbers, -4, -2), resultPair(numbers, -5, -1));
@@ -79,10 +75,9 @@ public class ProblemProcessorTest {
         // GIVEN
         IndexedNumber[] numbers = createIndexedNumbers(List.of(2, 1, 4, 5, 3, 7, 10, 22));
         Integer sumValue = 77;
-        Integer maxIndex = 7;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
 
         // THEN
         assertThat(pairs).isEmpty();
@@ -93,12 +88,10 @@ public class ProblemProcessorTest {
 
         // GIVEN
         IndexedNumber[] numbers = createIndexedNumbers(IntStream.rangeClosed(1, 10000000).boxed().collect(Collectors.toList()));
-        Integer maxIndex = 10000000 - 1;
-
         Integer sumValue = 6;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
 
         // THEN
         assertThat(pairs).containsExactlyInAnyOrder(resultPair(numbers, 2, 4), resultPair(numbers, 1, 5));
@@ -110,10 +103,9 @@ public class ProblemProcessorTest {
         // GIVEN
         IndexedNumber[] numbers = createIndexedNumbers(IntStream.rangeClosed(1, 10000000).boxed().collect(Collectors.toList()));
         Integer sumValue = 2500000;
-        Integer maxIndex = 10000000 - 1;
 
         // WHEN
-        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, maxIndex, numbers);
+        List<Pair<IndexedNumber, IndexedNumber>> pairs = processor.process(sumValue, numbers);
 
         // THEN
         assertThat(pairs).hasSize(1249999);

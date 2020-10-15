@@ -7,14 +7,14 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class ProblemProcessor {
 
-    List<Pair<IndexedNumber, IndexedNumber>> process(Integer sumValue, Integer maxIndex, IndexedNumber[] numbers) {
+    List<Pair<IndexedNumber, IndexedNumber>> process(Integer sumValue, IndexedNumber[] numbers) {
 
         Arrays.sort(numbers, IndexedNumber::compareTo);
 
         List<Pair<IndexedNumber, IndexedNumber>> result = new ArrayList<>();
 
         int sortedIndex = 0;
-        int reverseSortedIndex = maxIndex;
+        int reverseSortedIndex = numbers.length - 1;
 
         while (sortedIndex < reverseSortedIndex) {
             while (isSumLowerThanSumValue(sumValue, numbers, sortedIndex, reverseSortedIndex)) {
